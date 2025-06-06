@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Voting Results</title>
-         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
   <!-- DataTables CSS -->
   <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -99,7 +99,7 @@
       padding: 5px 10px;
     }
     .nav-item:hover {
-      border: 1px solid white;
+      border-bottom: 2px solid white;
     }
     .logo {
       display: flex;
@@ -160,6 +160,7 @@
   </div>
 
   <div id="winnerContainer"></div>
+
   <script>
     $(document).ready(function () {
       const scriptUrl = "https://script.google.com/macros/s/AKfycbwIHM4OAaFoOSTmobI2gZ1lTllf3N7P7C_RB2YEDhgLpL62EPdfcqkpB0YV3nbECNIj/exec";
