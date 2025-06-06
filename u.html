@@ -256,7 +256,6 @@ text-align: center;
     <!-- Winner info and vote table will be injected here -->
   </div>
 </div>
-
 <script>
   const partyMap = {
     "BJP": { name: "Nitin Pandey", photo: "d.jpg", logo: "image1.png" },
@@ -264,15 +263,6 @@ text-align: center;
     "Shivsena": { name: "Ajay Kamble", photo: "g.jpg", logo: "image3.png" },
     "MNS": { name: "Mohit Khode", photo: "a.jpg", logo: "image4.png" },
     "NCP": { name: "Yashvant More", photo: "b.jpg", logo: "image5.png" }
-  };
-
-  // Attractive colors mapped by party
-  const partyColors = {
-    "BJP": "#FF6B6B",       // Warm red
-    "Congress": "#1D3557",  // Deep blue
-    "Shivsena": "#4ECDC4",  // Soft orange
-    "MNS": "#2A9D8F",       // Fresh teal
-    "NCP": "#9D4EDD"        // Vibrant purple
   };
 
   const scriptUrl = "https://script.google.com/macros/s/AKfycbxipNDpmq-Rv56bV-S2UJCMJldh6MIm19uHtj_V3NfsQbcGvnyyOyieKXHQgPaLs2nm/exec";
@@ -291,9 +281,8 @@ text-align: center;
 
       const labels = Object.keys(voteCounts);
       const counts = Object.values(voteCounts);
-
-      // Map colors to parties to keep consistent color mapping
-      const backgroundColors = labels.map(label => partyColors[label] || "#6C757D"); // fallback gray
+      const colors = ["#FF6B6B", "#4ECDC4", "#FFD93D", "#1A535C", "#FF9F1C", "#6A4C93"]
+ // Updated colors
 
       const ctx = document.getElementById('voteChartPie').getContext('2d');
       new Chart(ctx, {
@@ -302,7 +291,7 @@ text-align: center;
           labels,
           datasets: [{
             data: counts,
-            backgroundColor: backgroundColors
+            backgroundColor: colors
           }]
         },
         options: {
