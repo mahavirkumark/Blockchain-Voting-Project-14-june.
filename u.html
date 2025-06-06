@@ -266,6 +266,15 @@ text-align: center;
     "NCP": { name: "Yashvant More", photo: "b.jpg", logo: "image5.png" }
   };
 
+  // Attractive colors mapped by party
+  const partyColors = {
+    "BJP": "#E63946",       // Warm red
+    "Congress": "#1D3557",  // Deep blue
+    "Shivsena": "#F4A261",  // Soft orange
+    "MNS": "#2A9D8F",       // Fresh teal
+    "NCP": "#9D4EDD"        // Vibrant purple
+  };
+
   const scriptUrl = "https://script.google.com/macros/s/AKfycbxipNDpmq-Rv56bV-S2UJCMJldh6MIm19uHtj_V3NfsQbcGvnyyOyieKXHQgPaLs2nm/exec";
 
   $(document).ready(function () {
@@ -282,7 +291,9 @@ text-align: center;
 
       const labels = Object.keys(voteCounts);
       const counts = Object.values(voteCounts);
-      const colors = ["#EF476F", "#06D6A0", "#FFD166", "#118AB2", "#8338EC", "#FF7F50"]; // Updated colors
+
+      // Map colors to parties to keep consistent color mapping
+      const backgroundColors = labels.map(label => partyColors[label] || "#6C757D"); // fallback gray
 
       const ctx = document.getElementById('voteChartPie').getContext('2d');
       new Chart(ctx, {
@@ -291,7 +302,7 @@ text-align: center;
           labels,
           datasets: [{
             data: counts,
-            backgroundColor: colors
+            backgroundColor: backgroundColors
           }]
         },
         options: {
@@ -339,6 +350,7 @@ text-align: center;
     });
   });
 </script>
+
 
 </body>
 </html>
