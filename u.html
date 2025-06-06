@@ -26,9 +26,9 @@
     }
     .chart-container {
     
-  width: 870px;
+  width: 600px;
       text-align: center;
-      height: 690px;
+      height: 600px;
     }
     .winner-container {
       width: 300px;
@@ -86,7 +86,7 @@
         padding: 10px 20px;
   background-color:#121262 ;
        
-        height: 40px;
+        height: 60px;
         color:white;
     }
     .nav-links {
@@ -207,12 +207,11 @@ image-orientation: initial;
         color: #ffffff;
         font-weight: bold;
         display: flex;
-        align-items: center;
  }
 .fa-users{
   margin-top: 7px;
   padding: 2px;
-  font-size: 17px;
+  font-size: 20px;
 }
 
 #status{
@@ -256,6 +255,7 @@ text-align: center;
     <!-- Winner info and vote table will be injected here -->
   </div>
 </div>
+
 <script>
   const partyMap = {
     "BJP": { name: "Nitin Pandey", photo: "d.jpg", logo: "image1.png" },
@@ -265,16 +265,7 @@ text-align: center;
     "NCP": { name: "Yashvant More", photo: "b.jpg", logo: "image5.png" }
   };
 
-  // Colors assigned by party name
-  const partyColors = {
-    "BJP": "#FF6B6B",
-    "Congress": "#4ECDC4",
-    "Shivsena": "#FFD93D",
-    "MNS": "#1A535C",
-    "NCP": "#FF9F1C"
-  };
-
-  const scriptUrl = "https://script.google.com/macros/s/AKfycbxipNDpmq-Rv56bV-S2UJCMJldh6MIm19uHtj_V3NfsQbcGvnyyOyieKXHQgPaLs2nm/exec";
+  const scriptUrl = "https://script.google.com/macros/s/AKfycbwIHM4OAaFoOSTmobI2gZ1lTllf3N7P7C_RB2YEDhgLpL62EPdfcqkpB0YV3nbECNIj/exec";
 
   $(document).ready(function () {
     $.getJSON(scriptUrl, function (res) {
@@ -290,9 +281,7 @@ text-align: center;
 
       const labels = Object.keys(voteCounts);
       const counts = Object.values(voteCounts);
-
-      // Map colors for each party label; fallback to gray if unknown party
-      const backgroundColors = labels.map(label => partyColors[label] || "#6A4C93");
+      const colors = ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', 'green'];
 
       const ctx = document.getElementById('voteChartPie').getContext('2d');
       new Chart(ctx, {
@@ -301,7 +290,7 @@ text-align: center;
           labels,
           datasets: [{
             data: counts,
-            backgroundColor: backgroundColors
+            backgroundColor: colors
           }]
         },
         options: {
@@ -311,7 +300,7 @@ text-align: center;
             datalabels: {
               formatter: (value, ctx) => `${ctx.chart.data.labels[ctx.dataIndex]}: ${value}`,
               color: '#fff',
-              font: { weight: 'bold', size: 20 }
+              font: { weight: 'bold', size: 16 }
             }
           }
         },
@@ -349,6 +338,5 @@ text-align: center;
     });
   });
 </script>
-
 </body>
 </html>
