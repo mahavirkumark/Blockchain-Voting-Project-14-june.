@@ -9,9 +9,9 @@
   <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-  <!-- Chart.js and Data Labels -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+  <!-- Chart.js and Data Labels (v4 compatible) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
 
   <!-- jQuery, Moment.js, DataTables -->
   <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
@@ -19,13 +19,10 @@
   <script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
 
   <style>
-    /* Your existing CSS styles are retained */
-    /* Ensure body and layout are styled consistently */
     body {
       background: linear-gradient(to right, #e2e2e2, #c9d6ff);
       font-family: Arial, sans-serif;
       margin: 0;
-
     }
     h1, h2 {
       text-align: center;
@@ -118,7 +115,7 @@
       display: none;
       color: red;
     }
-    h3{
+    h3 {
       text-align: center;
     }
   </style>
@@ -134,11 +131,9 @@
       <li><a href="index.html" class="nav-item">Home</a></li>
       <li><a href="u.html" class="nav-item">Voting Result</a></li>
       <li><a href="candidate.html" class="nav-item">Candidate</a></li>
-    
       <li><a href="j.html" class="nav-item">Admin Panel</a></li>
     </ul>
   </nav>
-
 
   <table id="pizza_party" class="display">
     <thead>
@@ -167,8 +162,8 @@
 
       const partyMap = {
         "BJP": { name: "Nitin Pandey", photo: "d.jpg", logo: "image1.png" },
-        "Congress": { name: "Veer Kale", photo: "e.jpg", logo: "image2.png" },
-        "Shivsena": { name: "Ajay Kamble", photo: "g.jpg", logo: "image3.png" },
+        "CONGRESS": { name: "Veer Kale", photo: "e.jpg", logo: "image2.png" },
+        "SHIVSENA": { name: "Ajay Kamble", photo: "g.jpg", logo: "image3.png" },
         "MNS": { name: "Mohit Khode", photo: "a.jpg", logo: "image4.png" },
         "NCP": { name: "Yashvant More", photo: "b.jpg", logo: "image5.png" }
       };
@@ -202,15 +197,16 @@
       function processChartData(data) {
         const voteCounts = {};
         data.forEach(row => {
-          const party = (row['vote-given-to-party'] || '').trim();
+          const party = (row['vote-given-to-party'] || '').trim().toUpperCase();
           if (!party) return;
-          const normalized = party.charAt(0).toUpperCase() + party.slice(1).toLowerCase();
-          voteCounts[normalized] = (voteCounts[normalized] || 0) + 1;
+          voteCounts[party] = (voteCounts[party] || 0) + 1;
         });
 
         const labels = Object.keys(voteCounts);
         const counts = Object.values(voteCounts);
         const colors = ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF'];
+
+        if (labels.length === 0) return;
 
         new Chart(document.getElementById('voteChartPie'), {
           type: 'pie',
@@ -257,20 +253,17 @@
           plugins: [ChartDataLabels]
         });
 
-        if (labels.length === 0) return;
-
         const maxVotes = Math.max(...counts);
         const winners = labels.filter((label, idx) => counts[idx] === maxVotes);
         const sortedVotes = [...new Set(counts)].sort((a, b) => b - a);
         const runnerUpVotes = sortedVotes[1] || 0;
         const margin = maxVotes - runnerUpVotes;
 
-        let html = `<h3>${winners.length > 1 ? "It's a Tie!" : "Winner Details"}<div style="text-align:center;"></h3>`;
+        let html = `<h3>${winners.length > 1 ? "It's a Tie!" : "Winner Details"}</h3>`;
         winners.forEach(party => {
-          const p = Object.keys(partyMap).find(k => k.toLowerCase() === party.toLowerCase());
-          const winner = partyMap[p];
+          const winner = partyMap[party];
           if (winner) {
-            html += `<div style="text-align:center;"><strong>${winner.name} (${p})</strong><br>
+            html += `<div style="text-align:center;"><strong>${winner.name} (${party})</strong><br>
               <img src="${winner.photo}" style="width:80px;"> <img src="${winner.logo}" style="width:50px;"></div>`;
           }
         });
@@ -282,4 +275,5 @@
   </script>
 </body>
 </html>
+
 
