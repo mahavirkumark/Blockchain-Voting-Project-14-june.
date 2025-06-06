@@ -163,7 +163,7 @@
 
   <script>
     $(document).ready(function () {
-      const scriptUrl = "https://script.google.com/macros/s/AKfycbxipNDpmq-Rv56bV-S2UJCMJldh6MIm19uHtj_V3NfsQbcGvnyyOyieKXHQgPaLs2nm/exec";
+      const scriptUrl = "https://script.google.com/macros/s/AKfycbwIHM4OAaFoOSTmobI2gZ1lTllf3N7P7C_RB2YEDhgLpL62EPdfcqkpB0YV3nbECNIj/exec";
 
       const partyMap = {
         "BJP": { name: "Nitin Pandey", photo: "d.jpg", logo: "image1.png" },
@@ -172,13 +172,6 @@
         "MNS": { name: "Mohit Khode", photo: "a.jpg", logo: "image4.png" },
         "NCP": { name: "Yashvant More", photo: "b.jpg", logo: "image5.png" }
       };
-        const partyColors = {
-    "BJP": "#E63946",       // Warm red
-    "Congress": "#1D3557",  // Deep blue
-    "Shivsena": "#F4A261",  // Soft orange
-    "MNS": "#2A9D8F",       // Fresh teal
-    "NCP": "#9D4EDD"        // Vibrant purple
-  };
 
       const table = $('#pizza_party').DataTable({
         ajax: {
@@ -217,7 +210,7 @@
 
         const labels = Object.keys(voteCounts);
         const counts = Object.values(voteCounts);
-        const colors = [];
+        const colors = ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF'];
 
         new Chart(document.getElementById('voteChartPie'), {
           type: 'pie',
@@ -253,7 +246,7 @@
                 anchor: 'end',
                 align: 'top',
                 color: '#000',
-                font: { weight: 'bold', size: 20 }
+                font: { weight: 'bold', size: 14 }
               }
             },
             scales: {
