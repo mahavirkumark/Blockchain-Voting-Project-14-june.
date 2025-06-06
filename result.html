@@ -172,6 +172,13 @@
         "MNS": { name: "Mohit Khode", photo: "a.jpg", logo: "image4.png" },
         "NCP": { name: "Yashvant More", photo: "b.jpg", logo: "image5.png" }
       };
+        const partyColors = {
+    "BJP": "#E63946",       // Warm red
+    "Congress": "#1D3557",  // Deep blue
+    "Shivsena": "#F4A261",  // Soft orange
+    "MNS": "#2A9D8F",       // Fresh teal
+    "NCP": "#9D4EDD"        // Vibrant purple
+  };
 
       const table = $('#pizza_party').DataTable({
         ajax: {
@@ -210,7 +217,7 @@
 
         const labels = Object.keys(voteCounts);
         const counts = Object.values(voteCounts);
-        const colors = ["#FF6F91", "#00C2A8", "#F9C74F", "#577590", "#F9844A", "#9D4EDD"];
+        const colors = [];
 
         new Chart(document.getElementById('voteChartPie'), {
           type: 'pie',
